@@ -15,7 +15,23 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.conf.urls.static import static
+from django.conf import settings
+from django.views.static import serve
+
+from leave import views as leave_views
 
 urlpatterns = [
+
+    url(r'^media/(?P<path>.*)$', serve, {
+        'document_root': settings.MEDIA_ROOT,
+    }),
+    url(r'^static/(?P<path>.*)$', serve, {
+        'document_root': settings.STATIC_URL,
+    }),
     url(r'^admin/', admin.site.urls),
-]
+    url(r'^logout$', leave_views.logout_view, name='staff_logout'),
+    url(r'^dashboard/$', leave_views.dashboard, name='dashboard'),
+    url(r'^$', leave_views.login_view, name='staff_login')
+
+] + static(settings.STATIC_URL, document_root=settings.MEDIA_ROOT)

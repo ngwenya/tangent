@@ -6,7 +6,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS += [
-    'leave'
+    'leave',
+    'leave.templatetags'
 ]
 
 DATABASES = {
