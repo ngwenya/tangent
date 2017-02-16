@@ -5,6 +5,10 @@ DEBUG = False
 
 ALLOWED_HOSTS = []
 
+INSTALLED_APPS += [
+    'leave'
+]
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
