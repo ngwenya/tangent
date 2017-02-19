@@ -31,6 +31,7 @@
                 <h3 class="text-center">Leave Management</h3>
             </div>
 
+            <!-- Display Leave remaining for the currently logged in user -->
             <div class="row col-lg-12">
                 <br>
 
@@ -43,16 +44,19 @@
                                 <form role="form">
                                     <fieldset disabled>
                                         <div class="form-group">
-                                            <input class="form-control" type="text" disabled title="Remaining Leave Days">
+                                            <input class="form-control" type="text" disabled
+                                                   title="Remaining Leave Days" value="{{ leave_days }}">
                                         </div>
                                     </fieldset>
                                 </form>
                             </div>
                         </div>
-
                 </div>
 
             </div>
+            <!-- Leave remaining ends here -->
+
+            <!-- button to display for leave request form -->
             <div class="row col-lg-12">
                 <div class="col-lg-offset-5 col-lg-2">
 
@@ -60,7 +64,9 @@
                 </div>
             </div>
 
+            <!-- / button -->
 
+            <!--  Leave request form -->
             <div class="row col-lg-12">
                     <br>
                 <div class="col-lg-4 col-lg-offset-4" id="leaveForm" hidden>
@@ -90,7 +96,10 @@
 
                 </div>
             </div>
+            <!-- /form -->
         </div>
+
+<!-- extra scrips start here -->
 
 {% block extra_js %}
 <script>
@@ -120,13 +129,10 @@ $(document).ready(function() {
         $('#leaveForm').slideDown();
     });
 
-    $(window).load(function() {
-
-
-
-    });
 });
 </script>
+
 {% endblock %}
+<!-- / extra -->
 
 {% endblock %}

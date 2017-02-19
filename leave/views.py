@@ -2,7 +2,7 @@
 from datetime import datetime, timedelta
 
 # Core Django imports
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from settings import base as settings
 from django.utils.dateparse import parse_date
@@ -56,8 +56,14 @@ def dashboard(request):
     :return:
     """
     template = 'leave/dashboard.html'
+    employee = get_object_or_404(Employee, employee=request.user)
+    leave_days = employee.leave_days
+    context = {
+        'leave_form': LeaveRequestForm,
+        'leave_days': leave_days
+    }
 
-    return render(request, template, {'leave_form': LeaveRequestForm()})
+    return render(request, template, context)
 
 
 def leave_request(request):
