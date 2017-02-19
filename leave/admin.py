@@ -9,7 +9,7 @@ class LeaveAdmin(admin.ModelAdmin):
 
 class EmployeeAdmin(admin.ModelAdmin):
 
-    list_display = ['start_date', 'leave', 'leave_days']
+    list_display = ['start_date', 'leave_days']
 
 admin.site.register(Leave, LeaveAdmin)
 admin.site.register(Employee, EmployeeAdmin)

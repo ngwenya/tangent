@@ -12,13 +12,16 @@
 
     <title>{% block title %}{% endblock %}</title>
 
-    <!-- Bootstrap Core CSS -->
+    <!-- jquery Core CSS -->
+    <script src="{%  static 'bootstrap/js/jquery/jquery.min.js' %}"></script>
+
     <link href="{% static 'bootstrap/css/bootstrap.min.css'  %}" rel="stylesheet">
 
     <!-- Bootstrap Theme CSS -->
 
     <link href="{%  static 'bootstrap/css/bootstrap-theme.min.css' %}" rel="stylesheet">
-
+    <link href="{%  static 'bootstrap/js/jquery/jquery-ui.css' %}" rel="stylesheet">
+    <link href="{%  static 'bootstrap/js/jquery/jquery-ui-1.10.4.custom.min.css' %}" rel="stylesheet">
     <!-- Custom Fonts -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -38,7 +41,10 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{%  static 'bootstrap/js/bootstrap.js' %}"></script>
+    <script src="{%  static 'bootstrap/js/jquery//jquery-ui.min.js' %}"></script>
 
+    {% block extra_js %}
+    {% endblock %}
 
 </body>
 

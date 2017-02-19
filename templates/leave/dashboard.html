@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load tags %}
+{% block title %} / HR Leave Dashboard {% endblock %}
+
+{% block content %}
+    <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <code>
+                    GET/details/{
+                    <br>
+                        'Company' : 'Tangent'
+                    <br>
+                        'Department' : 'HR'
+                    <br>
+                        'User' : '{{ request.user |capfirst }}'
+                    <br>
+                    }
+                </code>
+            </div>
+        </nav>
+
+        <div id="container">
+            <div class="row col-lg-12">
+                <h3 class="text-center">Leave Management</h3>
+            </div>
+
+            <div class="row col-lg-12">
+                <br>
+
+                <div class="col-lg-2 col-lg-offset-5">
+                     <div class="login-panel panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title text-center">Leave Remaining</h3>
+                            </div>
+                            <div class="panel-body">
+                                <form role="form">
+                                    <fieldset disabled>
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" disabled title="Remaining Leave Days">
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+
+                </div>
+
+            </div>
+            <div class="row col-lg-12">
+                <div class="col-lg-offset-5 col-lg-2">
+
+                        <button type="button" class="btn btn-success btn-lg btn-block" id="leaveRequest">Request Leave</button>
+                </div>
+            </div>
+
+
+            <div class="row col-lg-12">
+                    <br>
+                <div class="col-lg-4 col-lg-offset-4" id="leaveForm" hidden>
+                     <div class="login-panel panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title text-center">Leave Request</h3>
+                            </div>
+                            <div class="panel-body">
+                                <form role="form" method="post" action="{% url 'leave_request' %}">
+                                    {% csrf_token %}
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label for="first_name">Start Date</label>
+                                            {{ leave_form.start_date.errors }}
+                                            {{ leave_form.start_date  | addcss:"form-control" }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="end_date">End Date</label>
+                                            {{ leave_form.end_date.errors }}
+                                            {{ leave_form.end_date  | addcss:"form-control" }}
+                                        </div>
+                                    </fieldset>
+                                    <button type="submit" class="btn btn-success pull-right">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+
+{% block extra_js %}
+<script>
+
+$(document).ready(function() {
+
+
+    $('#id_start_date').datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeYear: true,
+        minDate: new Date(1900, 1 - 1, 1)
+
+    });
+
+    $('#id_end_date').datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeYear: true,
+        minDate: new Date(1900, 1 - 1, 1)
+
+    });
+
+
+
+    $('#leaveRequest').click(function (event) {
+
+        event.preventDefault();
+        $('#leaveForm').slideDown();
+    });
+
+    $(window).load(function() {
+
+
+
+    });
+});
+</script>
+{% endblock %}
+
+{% endblock %}

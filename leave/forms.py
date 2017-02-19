@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django import forms
 
+from .models import Leave
+
 
 class LoginForm(forms.ModelForm):
 
@@ -12,3 +14,10 @@ class LoginForm(forms.ModelForm):
         exclude = ('last_login', 'is_active', 'date_joined', 'is_staff', 'is_superuser', 'groups', 'user_permissions',
                    'first_name', 'last_name', 'email',)
         fields = ['username', 'password']
+
+
+class LeaveRequestForm(forms.ModelForm):
+
+    class Meta:
+        model = Leave
+        fields = ['start_date', 'end_date', 'leave_days']
