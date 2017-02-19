@@ -1,35 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'leave/base_dashboard.html' %}
 {% load tags %}
 {% block title %} / HR Leave Dashboard {% endblock %}
 
-{% block content %}
-    <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <code>
-                    GET/details/{
-                    <br>
-                        'Company' : 'Tangent'
-                    <br>
-                        'Department' : 'HR'
-                    <br>
-                        'User' : '{{ request.user |capfirst }}'
-                    <br>
-                    }
-                </code>
-            </div>
-        </nav>
+{% block base_content %}
 
-        <div id="container">
-            <div class="row col-lg-12">
-                <h3 class="text-center">Leave Management</h3>
-            </div>
+
+    <div id="container">
 
             <!-- Display Leave remaining for the currently logged in user -->
             <div class="row col-lg-12">
@@ -89,7 +65,7 @@
                                             {{ leave_form.end_date  | addcss:"form-control" }}
                                         </div>
                                     </fieldset>
-                                    <button type="submit" class="btn btn-success pull-right">Submit</button>
+                                    <button type="submit" class="btn btn-success pull-right" id="submit">Submit</button>
                                 </form>
                             </div>
                         </div>
@@ -97,7 +73,7 @@
                 </div>
             </div>
             <!-- /form -->
-        </div>
+    </div>
 
 <!-- extra scrips start here -->
 

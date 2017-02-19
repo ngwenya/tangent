@@ -2,11 +2,11 @@
 from datetime import datetime, timedelta
 
 # Core Django imports
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.contrib.auth import login, authenticate, logout
 from settings import base as settings
 from django.utils.dateparse import parse_date
-from django.http import JsonResponse
+from django.urls import reverse
 
 # My app imports
 from .models import Leave, Employee
@@ -84,12 +84,32 @@ def leave_request(request):
     if min_period > 90:  # check if employed for more than 3 months already
         # no of days applied for excluding weekends
         required_leave_days = calculate_req_leave_days(leave_start, leave_end)
-        process_application(request, employee, required_leave_days, leave_start, leave_end)  # process the application
-
+        if process_application(request, employee, required_leave_days, leave_start, leave_end) is True:
+            return HttpResponseRedirect(reverse('leave_created'))
+        else:
+            return HttpResponseRedirect(reverse('leave_declined'))
     else:
-        return JsonResponse({
-            'results': 'Failed'
-        })
+        return HttpResponseRedirect(reverse('leave_failed'))
+
+
+def leave_declined(request):
+
+    template = 'leave/declined.html'
+
+    return render(request, template)
+
+
+def failed_application(request):
+
+    template = 'leave/failed.html'
+
+    return render(request, template)
+
+
+def completed(request):
+    template = 'leave/completed.html'
+
+    return render(request, template)
 
 
 def process_application(request, employee, required_leave_days, leave_start, leave_end):
@@ -107,10 +127,14 @@ def process_application(request, employee, required_leave_days, leave_start, lea
         employee.leave_days -= required_leave_days
         create_leave(leave_start, leave_end, employee, required_leave_days)
         update_employee(request, employee.leave_days)
-
+        leave = True
+        return leave
     else:
+        # decline leave request, change status to 'declined'
         decline_leave(leave_start, leave_end, employee, required_leave_days)
         update_employee(request, employee.leave_days)
+        leave = False
+        return leave
 
 
 def decline_leave(leave_start, leave_end, employee, required_leave_days):

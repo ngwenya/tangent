@@ -1,0 +1,33 @@
+{% extends 'leave/base_dashboard.html' %}
+{% load tags %}
+{% block title %} / Request Declined {% endblock %}
+
+{% block base_content %}
+
+
+
+<div id="container">
+    <div class="row col-lg-12">
+        <div class="col-lg-6 col-lg-offset-5">
+
+            <code>
+
+                GET/results/{
+                <br>
+                <br>
+                'Status' : 'Declined'
+                <br>
+                'Comment' : 'Your request for leave has been declined due to insufficient leave days.'
+                <br>
+                'Dashboard' : ' <a href="{% url 'dashboard' %}">Click</a> here to go back to dashboard'
+                <br>
+                <br>
+                }
+
+            </code>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

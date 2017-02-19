@@ -1,0 +1,33 @@
+{% extends 'leave/base_dashboard.html' %}
+{% load tags %}
+{% block title %} / Request Failed {% endblock %}
+
+{% block base_content %}
+
+
+
+<div id="container">
+    <div class="row col-lg-12">
+        <div class="col-lg-6 col-lg-offset-5">
+
+            <code>
+
+                GET/results/{
+                <br>
+                <br>
+                'Status' : 'Failed'
+                <br>
+                'Comment' : 'You cannot apply for leave just yet. You need to work minimum of 3 Months to qualify'
+                <br>
+                'Dashboard' : ' <a href="{% url 'dashboard' %}">Click</a> here to go back to dashboard'
+                <br>
+                <br>
+                }
+
+            </code>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

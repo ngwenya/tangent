@@ -35,6 +35,9 @@ urlpatterns = [
     url(r'^logout$', leave_views.logout_view, name='staff_logout'),
     url(r'^dashboard/$', leave_views.dashboard, name='dashboard'),
     url(r'^leave_request/$', leave_views.leave_request, name='leave_request'),
+    url(r'^leave_declined/$', leave_views.leave_declined, name='leave_declined'),
+    url(r'^failed/$', leave_views.failed_application, name='leave_failed'),
+    url(r'^completed/$', leave_views.completed, name='leave_created'),
     url(r'^$', leave_views.login_view, name='staff_login')
 
 ] + static(settings.STATIC_URL, document_root=settings.MEDIA_ROOT)
