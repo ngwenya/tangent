@@ -21,9 +21,17 @@ class Leave(models.Model):
         db_table = 'leave'
 
 
+class Period(models.Model):
+
+    period = models.PositiveSmallIntegerField(default=0)
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
+
+
 class Employee(models.Model):
 
     employee = models.OneToOneField(User, on_delete=models.CASCADE)
+    periods = models.ManyToManyField(Period, blank=True)
     leave = models.ManyToManyField(Leave, blank=True)
     start_date = models.DateField(auto_now_add=False)
     leave_days = models.PositiveSmallIntegerField()

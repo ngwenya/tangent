@@ -22,6 +22,7 @@ from django.views.static import serve
 
 # My app imports
 from leave import views as leave_views
+from leave import tasks as tasks
 
 urlpatterns = [
 
